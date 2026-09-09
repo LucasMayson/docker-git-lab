@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./html:/usr/share/nginx/html
+    networks:
+      - minha-rede
+
+  ping-service:
+    build: .
+    stdin_open: true
+    tty: true
+    networks:
+      - minha-rede
+
+networks:
+  minha-rede:
+    driver: bridge
